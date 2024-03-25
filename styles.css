@@ -1,0 +1,80 @@
+:root{
+  --color-dark1 : rgb(14,14,14);
+  --color-dark2 : rgb(32,32,32);
+  --color-dark3 : rgb(22,22,22);
+  --color-white : #fff;
+  --color-gren1 : rgb(103,195,80);
+  --color-gren2 : rgb(51,149,26);
+  --color-red1 : rgb(184,40,35);
+  --color-red2 : rgb(146,22,17);
+  --color-purple : rgb(107,63,160);
+}
+
+body{
+  font-family: 'firacode';
+  background-color: var(--color-dark1);
+  color: var(--color-white);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4rem;
+}
+
+
+.content{
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+}
+
+
+.contentAdd{
+  display: flex;
+  align-self: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+#btnAddEstado, 
+#iptAddEstado {
+  border: none;
+  font-size: 1rem;
+  padding: 1rem;
+}
+
+#iptAddEstado{
+  width: 20rem;
+  border-radius: 1rem;
+  border-width: none;
+  outline-color: var(--color-purple);
+}
+
+#btnAddEstado{
+  background-color: var(--color-dark2);
+  color: var(--color-white);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  transition: .4s;
+}
+
+#btnAddEstado:hover{
+  background-color: var(--color-purple);
+}
+
+#listaEstado{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 0;
+}
+
+#listaEstado li{
+  display: flex;
+  list-style-type: none;
+  font-size: 1.4rem;
+  text-transform: capitalize;
+  justify-content: space-between;
+}
+
