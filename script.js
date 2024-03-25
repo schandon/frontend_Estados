@@ -23,10 +23,10 @@ function showEstados(){
     let list = document.getElementById('listaEstado');
     list.innerHTML= '';
     for (let i=0; i<values.length; i++) {
-      list.innerHTML += `<li>${values[i]['estado']} <button></button></li>`
+      list.innerHTML += `<li>${values[i]['estado']} <button id='btnRemoveEstado' onclick='deleteItem("${values[i]['estado']}")'> Delete </button></li>`
     }
 }
- showEstados()
-// function deleteEstado(){
 
-// }
+function deleteEstado(data){
+  console.log(data)
+}
