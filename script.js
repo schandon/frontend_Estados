@@ -10,9 +10,11 @@ function validaSeEstadoExiste(){
 
 function addEstado(){
   let input = document.getElementById('iptAddEstado');
+  input.style.border = '';
   
   //Validação input
   if(!input.value){
+    input.style.border = '3px solid red';
     alert('Para adicionar o estado é necessário utilizar o Nome , UF ou ID do estado.');
   }
   else if(validaSeEstadoExiste()){
