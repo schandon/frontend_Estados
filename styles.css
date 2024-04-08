@@ -7,7 +7,8 @@
   --color-gren2 : rgb(51,149,26);
   --color-red1 : rgb(184,40,35);
   --color-red2 : rgb(146,22,17);
-  --color-purple : rgb(107,63,160);
+  --color-purple1 : rgb(161,132,194);
+  --color-purple2 : rgb(116,79,204);
 }
 
 body{
@@ -36,21 +37,32 @@ body{
 }
 
 #btnAddEstado, 
-#iptAddEstado {
+#newEstado,
+#newUf {
   border: none;
   font-size: 1rem;
   padding: 1rem;
+
 }
 
-#iptAddEstado{
-  width: 20rem;
+#newEstado,
+#newUf{
   border-radius: 1rem;
   border-width: none;
-  outline-color: var(--color-purple);
+  outline: none;
+  
+}
+#newEstado{
+  width: 23rem;
+  
+}
+
+#newUf{
+  width: 3rem;
 }
 
 #btnAddEstado{
-  background-color: var(--color-dark2);
+  background-color: var(--color-purple1);
   color: var(--color-white);
   border-radius: 50%;
   width: 50px;
@@ -60,7 +72,7 @@ body{
 }
 
 #btnAddEstado:hover{
-  background-color: var(--color-purple);
+  background-color: var(--color-purple2);
 }
 
 #listaEstado{
