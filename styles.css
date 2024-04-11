@@ -36,7 +36,7 @@ body{
   flex-wrap: wrap;
 }
 
-#btnAddEstado, 
+#btnAdd, 
 #newEstado,
 #newUf {
   border: none;
@@ -61,7 +61,7 @@ body{
   width: 3rem;
 }
 
-#btnAddEstado{
+#btnAdd{
   background-color: var(--color-purple1);
   color: var(--color-white);
   border-radius: 50%;
@@ -71,7 +71,7 @@ body{
   transition: .4s;
 }
 
-#btnAddEstado:hover{
+#btnAdd:hover{
   background-color: var(--color-purple2);
 }
 

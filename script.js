@@ -1,5 +1,5 @@
 const getList = async () => {
-  let url = 'http://127.0.0.1:5000/estado';
+  let url = 'http://127.0.0.1:7000/estado';
   fetch(url, {
     method: 'get',
   })
@@ -21,7 +21,7 @@ const postItem = async (inputEstado, inputUf) => {
   formData.append('uf', inputUf);
 
 
-  let url = 'http://127.0.0.1:5000/produto';
+  let url = 'http://127.0.0.1:7000/produto';
   fetch(url, {
     method: 'post',
     body: formData

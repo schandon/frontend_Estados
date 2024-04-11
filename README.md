@@ -12,7 +12,7 @@ Estaremos fazendo a utilização de 2 Api's, uma interna e outra puclica.
 Para rodar o código estaremos fazendo o conjuto de Passos a seguir.
 * Passo 01:
 ```
-  python -m http.server
+  python -m http.server 1010
 ```
 * Passo 02:
   * Abra seu navegador da web e navegue até o endereço fornecido, por exemplo, http://localhost:8000/index.html. Isso carregará seu arquivo HTML no navegador e permitirá que você interaja com o formulário, ou na porta que aparecer após que rodar o Passo 01.
