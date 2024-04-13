@@ -16,25 +16,23 @@
     <h1>Estados</h1>
   </header>
   
-  <section class="newItem">
-    <input type="text" id="newEstado" placeholder="Digite seu estado">
-    <input type="text" id="newUf" placeholder="UF" maxlength="2">
-    <button onclick="newItem()" id="btnAdd" title="Clique aqui para adicionar um novo estado">
+  <form id="estadoForm">
+    <input type="text" id="newEstado" name="estado" placeholder="Digite seu estado" required>
+    <input type="text" id="newUf" name="uf" placeholder="UF" maxlength="2" required>
+    <button type="button" onclick="newItem()" id="btnAdd" title="Clique aqui para adicionar um novo estado">
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
         <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
       </svg>
     </button>
-
-  </section>
+  </form>
   
   <section class="items">
     <table id="TabelaEstados">
       <tr>
-        <th>ID</th>
-        <th>Estado</th>
-        <th>UF</th>
-        <th>Código IBGE</th>
-        <button onclick="" id="btnRemove"  title="Clique aqui para esmover o estado desejado">Deletar </button>
+        <th id="idTabela">ID</th>
+        <th id="nomeTabela">Estado</th>
+        <th id="ufTabela">UF</th>
+        <th id="removeTabela">X</th>
       </tr>
     </table>
   </section>

@@ -1,11 +1,11 @@
 const getList = async () => {
-  let url = 'http://127.0.0.1:7000/estado';
+  let url = 'http://127.0.0.1:5000/estados';
   fetch(url, {
     method: 'get',
   })
     .then((response) => response.json())
     .then((data) => {
-      data.estados.forEach(estado => insertList(estado.nome, estado.uf))
+      data.estados.forEach(estado => insertList(estado.id,estado.nome, estado.uf))
     })
     .catch((error) => {
       console.error('Error:', error);
@@ -15,17 +15,26 @@ const getList = async () => {
 
 getList()
 
-const postItem = async (inputEstado, inputUf) => {
-  const formData = new FormData();
-  formData.append('nome', inputEstado);
-  formData.append('uf', inputUf);
+const postItem = async (nome, uf) => {
 
+  var data = {
+    nome : nome,
+    uf : uf
+  }
 
-  let url = 'http://127.0.0.1:7000/produto';
+  console.log(data);
+  console.log(nome);
+  console.log(uf);
+
+  let url = 'http://127.0.0.1:5000/estado';
+
   fetch(url, {
-    method: 'post',
-    body: formData
-  })
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data)
+  })  
     .then((response) => response.json())
     .catch((error) => {
       console.error('Error:', error);
@@ -49,7 +58,7 @@ const newItem = () => {
 
 const insertList = (nameEstado, uf ) => {
   var item = [nameEstado, uf ]
-  var table = document.getElementById('listaEstado');
+  var table = document.getElementById('TabelaEstados');
   var row = table.insertRow();
 
   for (var i = 0; i < item.length; i++) {
@@ -57,8 +66,8 @@ const insertList = (nameEstado, uf ) => {
     cel.textContent = item[i];
   }
   insertButton(row.insertCell(-1))
-  document.getElementById("newEstado").value = "";
-  document.getElementById("newUf").value = "";
+  document.getElementById("newEstado").value= "";
+  document.getElementById("newUf").value= "";
 
   removeElement()
 }
@@ -69,7 +78,8 @@ const insertList = (nameEstado, uf ) => {
 */
 const insertButton = (parent) => {
   let span = document.createElement("span");
-  let txt = document.createTextNode("\u00D7");
+  let txt = document.createTextNode("X");
+  span.title = "Clique aqui para remover o estado"
   span.className = "close";
   span.appendChild(txt);
   parent.appendChild(span);
@@ -87,6 +97,7 @@ const removeElement = () => {
   for (i = 0; i < close.length; i++) {
     close[i].onclick = function () {
       let div = this.parentElement.parentElement;
+      console.log(div[0])
       const nomeItem = div.getElementsByTagName('td')[0].innerHTML
       if (confirm("Você tem certeza?")) {
         div.remove()
@@ -95,4 +106,23 @@ const removeElement = () => {
       }
     }
   }
+}
+
+const deleteItem = async (estado_id) => {
+  let url = 'http://127.0.0.1:5000/estado?id=' + estado_id ;
+  data = {
+    id: estado_id
+  }
+
+  fetch(url, {
+      method: 'DELETE',
+      headers: {
+          'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data)
+  }) 
+    .then((response) => response.json())
+    .catch((error) => {
+      console.error('Error:', error);
+    }); 
 }
