@@ -5,27 +5,18 @@ const getList = async () => {
   })
     .then((response) => response.json())
     .then((data) => {
-      data.estados.forEach(estado => insertList(estado.id,estado.nome, estado.uf))
+      console.log(data.estados);
+      data.estados.forEach(estados => insertList(estados.id,estados.nome, estados.uf))
     })
     .catch((error) => {
       console.error('Error:', error);
     });
-    console.log(data.estados);
+    
 }
 
 getList()
 
-const postItem = async (nome, uf) => {
-
-  var data = {
-    nome : nome,
-    uf : uf
-  }
-
-  console.log(data);
-  console.log(nome);
-  console.log(uf);
-
+const postItem = async ( newEstado, newUf) => {
   let url = 'http://127.0.0.1:5000/estado';
 
   fetch(url, {
@@ -33,7 +24,7 @@ const postItem = async (nome, uf) => {
       headers: {
           'Content-Type': 'application/json',
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify({nome:newEstado.value, uf:newUf.value})
   })  
     .then((response) => response.json())
     .catch((error) => {
@@ -41,23 +32,43 @@ const postItem = async (nome, uf) => {
     });
 }
 
-const newItem = () => {
-  let inputEstado = document.getElementById("newEstado").value;
-  let inputUf = document.getElementById("newUf").value;
+// const newItem = () => {
+//   let inputEstado = document.getElementById("newEstado").value;
+//   let inputUf = document.getElementById("newUf").value;
   
 
-  if ((inputEstado === '') && (inputUf === '')) {
-    alert("Para o cadastro do Estado será necessário informar Estado ou UF desejado!");
+//   if ((inputEstado === '') && (inputUf === '')) {
+//     alert("Para o cadastro do Estado será necessário informar Estado ou UF desejado!");
+//   } else {
+//     insertList(inputEstado, inputUf)
+//     postItem(inputEstado, inputUf)
+//     alert("Estado adicionado com Sucesso adicionado!")
+//   }
+// }
+
+const newItem = () => {
+  let inputEstado = document.getElementById("newEstado");
+  let inputUf = document.getElementById("newUf");
+  
+  if ((inputEstado === '') || (inputUf === '')) {
+    alert("Para o cadastro do Estado será necessário informar Estado e UF desejado!");
   } else {
-    insertList(inputEstado, inputUf)
     postItem(inputEstado, inputUf)
-    alert("Estado adicionado com Sucesso adicionado!")
+      .then(data => {
+        insertList(data.id, inputEstado, inputUf);
+        alert("Estado adicionado com sucesso!");
+      })
+      .catch(error => {
+        console.error('Erro ao adicionar estado:', error);
+        alert("Erro ao adicionar estado. Por favor, tente novamente.");
+        document.getElementById("newEstado").value= "";
+        document.getElementById("newUf").value= "";       
+      });
   }
 }
 
-
-const insertList = (nameEstado, uf ) => {
-  var item = [nameEstado, uf ]
+const insertList = ( id, nome, uf ) => {
+  var item = [id ,nome, uf]
   var table = document.getElementById('TabelaEstados');
   var row = table.insertRow();
 
@@ -68,7 +79,6 @@ const insertList = (nameEstado, uf ) => {
   insertButton(row.insertCell(-1))
   document.getElementById("newEstado").value= "";
   document.getElementById("newUf").value= "";
-
   removeElement()
 }
 /*
