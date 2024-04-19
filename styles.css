@@ -76,6 +76,10 @@ body{
   background-color: var(--color-purple2);
 }
 
+#TabelaEstados{
+  /* width: 23rem; */
+  width: 500px;
+}
 table,
 th,
 td {

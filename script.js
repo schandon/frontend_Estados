@@ -5,7 +5,7 @@ const getList = async () => {
   })
     .then((response) => response.json())
     .then((data) => {
-      data.estados.forEach(estados => insertList(estados.nome, estados.uf))
+      data.estados.forEach(async estados => insertList( await validaEstado(estados.uf), estados.nome, estados.uf  ))
     })
     .catch((error) => {
       console.error('Error:', error);
@@ -16,15 +16,13 @@ const getList = async () => {
 getList()
 
 
-const postItem = async (newEstado, newUf) => {
+const postItem = async (id_valida ,newEstado, newUf) => {
   let url = 'http://127.0.0.1:5000/estado';
 
   try {
     // Move a declaração e atribuição de id_valida para dentro da função
-    const id_valida = await validaEstado(document.getElementById('newUf').value);
-    console.log("ID válido no post:", id_valida);
-
-    const response = await fetch(url, {
+   
+    fetch(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -45,23 +43,6 @@ const postItem = async (newEstado, newUf) => {
   }
 }
 
-// const postItem = async (  newEstado, newUf) => {
-//   let url = 'http://127.0.0.1:5000/estado';
-
-//   const id_valida = await validaEstado(document.getElementById('newUf').value);
-
-//   fetch(url, {
-//       method: 'POST',
-//       headers: {
-//           'Content-Type': 'application/json',
-//       },
-//       body: JSON.stringify({id: id_valida, nome:newEstado, uf:newUf})    
-//   })
-//     .then((response) => response.json())
-//     .catch((error) => {
-//       console.error('Error:', error);
-//     });
-// }
 
 
 const validaEstado = async (sigla) => {
@@ -75,19 +56,16 @@ const validaEstado = async (sigla) => {
       }
     });
     const data = await response.json();
-    if (data != null) {
-      console.log(data); // Aqui você pode manipular os dados conforme necessário
-      return data.id;
+    if (data != null) { 
+      return data.id; 
     }
   } catch (error) {
     console.error('Erro ao verificar o estado:', error);
-    return null; // Retorna null se ocorrer um erro na requisição
+    return null;
   }
 }
 
-const insertList = async ( nome, uf) => {
-  id = await validaEstado(uf)
-
+const insertList = async (  id_valida ,nome, uf ) => {
   if(nome === "" ) {
     alert("É necessário um NOME para cadastro do estado");
     return;
@@ -97,64 +75,35 @@ const insertList = async ( nome, uf) => {
     return;
   }
 
-
-  // Cria um array com os dados do item a ser inserido na lista
-  var item = [id, nome, uf];
-
-  // Obtém a referência da tabela onde os itens serão inseridos
+  var item = [id_valida, nome, uf];
   var table = document.getElementById('TabelaEstados');
-
-  // Insere uma nova linha na tabela
   var row = table.insertRow();
 
-  // Preenche as células da nova linha com os dados do item
   for (var i = 0; i < item.length; i++) {
     var cel = row.insertCell(i);
     cel.textContent = item[i];
   }
 
-  // Insere o botão de remoção na última célula da nova linha
   insertButton(row.insertCell(-1));
-
-  // Limpa os campos de entrada
   document.getElementById("newEstado").value = "";
   document.getElementById("newUf").value = "";
-
-  // Remove o destaque do elemento anteriormente selecionado
   removeElement();
 }
 
 
 const newItem = async () => {
-  let inputEstado = document.getElementById("newEstado");
-  let inputUf = document.getElementById("newUf");
-  let id_valida = await validaEstado(inputUf.value);
+  let nome = document.getElementById("newEstado").value;
+  let uf = document.getElementById("newUf").value;
+  let id_valida = await validaEstado(uf);
 
-  console.log("id_valida",id_valida);
-  validaEstado(inputUf.value);
+  console.log("Nome:",nome, "Uf",uf , "id", id_valida);
 
-  insertList( inputEstado.value, inputUf.value); 
-  postItem( id_valida, inputEstado, inputUf)
+  insertList(id_valida, nome, uf); 
+  postItem(id_valida, nome, uf)
   document.getElementById("newEstado").value= "";
   document.getElementById("newUf").value= ""; 
   
 }
-
-// const insertList = ( id ,nome, uf ) => {
-//   var item = [localStorage.getItem('ibgeid') ,nome, uf]
-//   var table = document.getElementById('TabelaEstados');
-//   var row = table.insertRow();
-
-//   for (var i = 0; i < item.length; i++) {
-//     var cel = row.insertCell(i);
-//     cel.textContent = item[i];
-//   }
-//   insertButton(row.insertCell(-1))
-//   document.getElementById("newEstado").value= "";
-//   document.getElementById("newUf").value= "";
-//   removeElement()
-// }
-
 
 
 /*

@@ -5,25 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="./assets/Fonts/fontes.css">
-  <title> Adicionando Estados </title>
+  <title> Busca Estados </title>
 </head>
 <body>
   <div id="menu">
     <a href="index.html">Home</a>
     <a href="https://servicodados.ibge.gov.br/api/v1/localidades/estados/">Api Externa</a>
-    <a href="http://localhost:5000/openapi/">Documenta API</a>
+    <a href="busca.html">Buscar</a>
   </div>
   <header class="title">
-    <h1>Estados</h1>
+    <h1>Buscar Cidades</h1>
   </header>
   
   <form id="estadoForm">
-    <input type="text" id="newEstado" name="estado" placeholder="Digite seu estado" required>
-    <input type="text" id="newUf" name="uf" placeholder="UF" maxlength="2" required>
-    <button type="button" onclick="newItem()" id="btnAdd" title="Clique aqui para adicionar um novo estado">
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
-        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
-      </svg>
+    <input type="text" id="infoBusca" placeholder="Digite aqui sua  estado" required>
+    <button type="button" onclick="" id="btnBusca" title="Clique aqui para buscar um estado especifica">
+      <img src="./assets/icones/busca.png">
     </button>
   </form>
   
